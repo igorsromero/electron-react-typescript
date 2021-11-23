@@ -1,25 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './app.scss'
-import logo from '../../assets/logo.svg'
+import { AddTask } from 'src/components/AddTask'
+import { Title } from 'src/components/Title'
+import { ListTask } from 'src/components/ListTask'
 
 export const App: React.FC = () => {
+
+  const [taskList, setTaskList] = useState<any>([])
+
+  const cadastrarTask = (taskDate: Date, taskName: string) => {
+    let tempTaskList = [...taskList]
+    tempTaskList.push({
+      status: false,
+      taskName: taskName,
+      taskDate: taskDate,
+    })
+    setTaskList(tempTaskList)
+  }
+
+  const atualizarStatusTask = (index: number, status: boolean) => {
+    let tempTaskList = [...taskList]
+    tempTaskList[index].status = status
+    setTaskList(tempTaskList)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/ui/app.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Title />
+      <AddTask cadastrarTask={cadastrarTask} />
+      <hr />
+      {/* ScrollView */}
+      <ListTask taskList={taskList} atualizarStatusTask={atualizarStatusTask} />
     </div>
   )
 }
