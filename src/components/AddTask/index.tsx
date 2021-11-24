@@ -7,7 +7,7 @@ type Props = {
 
 export const AddTask = ({ cadastrarTask }: Props) => {
 
-  const [taskDate, setTaskDate] = useState<Date | any>(``)
+  const [taskDate, setTaskDate] = useState<any>(``)
   const [taskName, setTaskName] = useState<string>(``)
 
   return (

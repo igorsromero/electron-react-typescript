@@ -28,3 +28,19 @@ yarn package
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+<details>
+<summary>Preparação do ambiente com MongoDB</summary>
+
+
+Instalação do MongoDB:
+```
+yarn add mongodb
+```
+
+Instalação dos Types do MongoDB:
+```
+yarn add @types/mongodb
+```
+
+</details>

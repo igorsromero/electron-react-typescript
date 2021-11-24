@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles.scss'
-import { Task } from '../../interfaces/task.interface'
+import { listarTodos } from 'src/database'
 
 export const ListTask = (props: any) => {
+
+  const [taskList, setTaskList] = useState<any>([])
+
+  useEffect(() => {
+    listarTodos().then((dados) => {
+      setTaskList({ ...dados })
+    })
+  }, [])
+
   return (
     <div className="listTaskContainer">
       <div className="listTasks">
@@ -16,11 +25,11 @@ export const ListTask = (props: any) => {
             </tr>
           </thead>
           <tbody>
-            {props.taskList.map((item: Task, index: number) => (
-              <tr key={index}>
-                <td><input className="statusCheckbox" type="checkbox" checked={item.status} onChange={(event) => { props.atualizarStatusTask(index, event.target.checked) }} /></td>
-                <td>{item.taskName}</td>
-                <td>{item.taskDate}</td>
+            {Object.entries(taskList).map((item: any) => (
+              <tr key={item[1]._id}>
+                <td><input className="statusCheckbox" type="checkbox" checked={item[1].status} onChange={(event) => { props.atualizarStatusTask(item[1]._id, event.target.checked) }} /></td>
+                <td>{item[1].taskName}</td>
+                <td>{item[1].taskDate}</td>
                 <td>Editar / Apagar</td>
               </tr>
             ))}

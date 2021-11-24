@@ -1,22 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './app.scss'
 import { AddTask } from 'src/components/AddTask'
 import { Title } from 'src/components/Title'
 import { ListTask } from 'src/components/ListTask'
+import { inserir } from 'src/database'
+
 
 export const App: React.FC = () => {
 
   const [taskList, setTaskList] = useState<any>([])
 
   const cadastrarTask = (taskDate: Date, taskName: string) => {
-    let tempTaskList = [...taskList]
-    tempTaskList.push({
-      status: false,
-      taskName: taskName,
-      taskDate: taskDate,
-    })
-    setTaskList(tempTaskList)
+    const task = { "status": false, "taskName": taskName, "taskDate": taskDate }
+    inserir(task)
   }
 
   const atualizarStatusTask = (index: number, status: boolean) => {
@@ -31,7 +28,7 @@ export const App: React.FC = () => {
       <AddTask cadastrarTask={cadastrarTask} />
       <hr />
       {/* ScrollView */}
-      <ListTask taskList={taskList} atualizarStatusTask={atualizarStatusTask} />
+      <ListTask atualizarStatusTask={atualizarStatusTask} />
     </div>
   )
 }
