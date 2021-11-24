@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './styles.scss'
-import { listarTodos } from 'src/database'
 
 export const ListTask = ({ taskList, atualizarStatusTask }: any) => {
 
