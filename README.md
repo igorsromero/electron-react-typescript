@@ -43,4 +43,9 @@ Instalação dos Types do MongoDB:
 yarn add @types/mongodb
 ```
 
+Instalação do React-Icons:
+```
+yarn add react-icons --save
+```
+
 </details>

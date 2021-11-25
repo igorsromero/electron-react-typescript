@@ -4,12 +4,13 @@ import './app.scss'
 import { AddTask } from 'src/components/AddTask'
 import { Title } from 'src/components/Title'
 import { ListTask } from 'src/components/ListTask'
-import { inserir, listarTodos } from 'src/database'
+import { atualizar, deletarTask, inserir, listarTodos } from 'src/database'
 
 
 export const App: React.FC = () => {
 
   const [taskList, setTaskList] = useState<any>([])
+  const [tempId, setTempId] = useState<string>(``)
 
   const listarTasks = () => {
     listarTodos().then((dados) => {
@@ -21,26 +22,39 @@ export const App: React.FC = () => {
     listarTasks()
   }, [])
 
-  const cadastrarTask = (taskDate: Date, taskName: string) => {
-    const task = { "status": false, "taskName": taskName, "taskDate": taskDate }
+  const cadastrarTask = (taskStatus: boolean, taskDate: Date, taskName: string) => {
+    const task = { "status": taskStatus, "taskName": taskName, "taskDate": taskDate }
     inserir(task)
     listarTasks()
   }
 
-  const atualizarStatusTask = (index: number, status: boolean) => {
-    let tempTaskList = [...taskList]
-    tempTaskList[index].status = status
-    setTaskList(tempTaskList)
+  const alterarTask = (id: string, taskStatus: boolean, taskDate: Date, taskName: string) => {
+    const task = { "status": taskStatus, "taskName": taskName, "taskDate": taskDate }
+    atualizar(id, task)
+    listarTasks()
   }
 
+  const atualizarStatusTask = (id: string, status: boolean) => {
+    const task = { "status": status }
+    atualizar(id, task)
+    listarTasks()
+  }
+
+  const handleClick = (id: string, action: string) => {
+    if (action === `deletar`) {
+      deletarTask(id)
+    } else {
+      setTempId(id)
+    }
+    listarTasks()
+  }
 
   return (
     <div className="App">
       <Title />
-      <AddTask cadastrarTask={cadastrarTask} />
+      <AddTask tempId={tempId} setTempId={setTempId} cadastrarTask={cadastrarTask} alterarTask={alterarTask} handleClick={handleClick} />
       <hr />
-      {/* ScrollView */}
-      <ListTask taskList={taskList} atualizarStatusTask={atualizarStatusTask} />
+      <ListTask taskList={taskList} atualizarStatusTask={atualizarStatusTask} handleClick={handleClick} />
     </div>
   )
 }
