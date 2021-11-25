@@ -4,7 +4,7 @@ import './app.scss'
 import { AddTask } from 'src/components/AddTask'
 import { Title } from 'src/components/Title'
 import { ListTask } from 'src/components/ListTask'
-import { atualizar, deletarTask, inserir, listarTodos } from 'src/database'
+import { createTask, findAllTasks, updateTask, removeTask } from '../../controller/task.controller'
 
 
 export const App: React.FC = () => {
@@ -12,49 +12,49 @@ export const App: React.FC = () => {
   const [taskList, setTaskList] = useState<any>([])
   const [tempId, setTempId] = useState<string>(``)
 
-  const listarTasks = () => {
-    listarTodos().then((dados) => {
-      setTaskList({ ...dados })
+  const listTasks = () => {
+    findAllTasks().then((data) => {
+      setTaskList({ ...data })
     })
   }
 
   useEffect(() => {
-    listarTasks()
+    listTasks()
   }, [])
 
-  const cadastrarTask = (taskStatus: boolean, taskDate: Date, taskName: string) => {
+  const handleCreateTask = (taskStatus: boolean, taskDate: Date, taskName: string) => {
     const task = { "status": taskStatus, "taskName": taskName, "taskDate": taskDate }
-    inserir(task)
-    listarTasks()
+    createTask(task)
+    listTasks()
   }
 
-  const alterarTask = (id: string, taskStatus: boolean, taskDate: Date, taskName: string) => {
+  const handleUpdateTask = (id: string, taskStatus: boolean, taskDate: Date, taskName: string) => {
     const task = { "status": taskStatus, "taskName": taskName, "taskDate": taskDate }
-    atualizar(id, task)
-    listarTasks()
+    updateTask(id, task)
+    listTasks()
   }
 
-  const atualizarStatusTask = (id: string, status: boolean) => {
+  const handleUpdateStatus = (id: string, status: boolean) => {
     const task = { "status": status }
-    atualizar(id, task)
-    listarTasks()
+    updateTask(id, task)
+    listTasks()
   }
 
   const handleClick = (id: string, action: string) => {
-    if (action === `deletar`) {
-      deletarTask(id)
-    } else {
+    if (action === `delete`) {
+      removeTask(id)
+    } else if (action === `edit`) {
       setTempId(id)
     }
-    listarTasks()
+    listTasks()
   }
 
   return (
     <div className="App">
       <Title />
-      <AddTask tempId={tempId} setTempId={setTempId} cadastrarTask={cadastrarTask} alterarTask={alterarTask} handleClick={handleClick} />
+      <AddTask tempId={tempId} setTempId={setTempId} handleCreateTask={handleCreateTask} handleUpdateTask={handleUpdateTask} handleClick={handleClick} />
       <hr />
-      <ListTask taskList={taskList} atualizarStatusTask={atualizarStatusTask} handleClick={handleClick} />
+      <ListTask taskList={taskList} handleUpdateStatus={handleUpdateStatus} handleClick={handleClick} />
     </div>
   )
 }

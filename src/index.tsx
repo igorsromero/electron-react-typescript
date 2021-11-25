@@ -5,7 +5,7 @@ import './index.scss'
 
 import { App } from './ui/app'
 import { Splash } from './ui/splash'
-import './database.ts'
+import './database/index.ts'
 
 /**
  * Defines which view will be rendered in the root node.
