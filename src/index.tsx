@@ -5,7 +5,9 @@ import './index.scss'
 
 import { App } from './ui/app'
 import { Splash } from './ui/splash'
-import './database/index.ts'
+import { createCollection } from './model/taskList.model'
+
+createCollection()
 
 /**
  * Defines which view will be rendered in the root node.

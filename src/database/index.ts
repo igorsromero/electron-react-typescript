@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb'
 
 const url = `mongodb://localhost:27017/valore`
 
-export async function mongoConnect() {
+async function mongoConnect() {
   return (await MongoClient.connect(url))
 }
 
