@@ -21,7 +21,7 @@ export async function inserir(dados: ITask) {
 export async function listarTodos() {
   const db = await MongoClient.connect(url)
   const dbo = db.db(`valore`)
-  const dados = await dbo.collection(`taskList`).find({}).toArray()
+  const dados = await dbo.collection(`taskList`).find({}).sort({ status: 1 }).toArray()
   db.close()
   return dados
 }
@@ -44,8 +44,5 @@ export async function deletarTask(id: string) {
 export async function atualizar(id: string, dados: ITask | any) {
   const db = await MongoClient.connect(url)
   const dbo = db.db(`valore`)
-  const dado = dbo.collection(`taskList`).updateOne({ _id: new ObjectId(id) }, { $set: dados }, (error, result) => {
-    db.close()
-  })
-  return dado
+  return await dbo.collection(`taskList`).updateOne({ _id: new ObjectId(id) }, { $set: dados })
 }
