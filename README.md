@@ -31,20 +31,20 @@ Portanto, você deve construir uma aplicação de acordo com esse cenário 🙂.
 
 Requisitos da aplicação:
 
-[x] - A aplicação deve ser construída em Electron (v13.x), usando React (v17.x) e MongoDB (v4.4), usando Typescript (v4.x);
+- [x] - A aplicação deve ser construída em Electron (v13.x), usando React (v17.x) e MongoDB (v4.4), usando Typescript (v4.x); n1
 
-[x] - Você precisa criar uma aplicação de cadastro;
+- [x] - Você precisa criar uma aplicação de cadastro;
 
-[x] - Considere que o MongoDB esteja instalado localmente, não sendo necessário configurar usuário/senha, e o banco de dados tenha o nome "valore". (A string de conexão de seria: mongodb://localhost:27017/valore);
+- [x] - Considere que o MongoDB esteja instalado localmente, não sendo necessário configurar usuário/senha, e o banco de dados tenha o nome "valore". (A string de conexão de seria: mongodb://localhost:27017/valore);
 
-[x] - Você precisa fazer operações de find, findOne, insert e update no MongoDB.
+- [x] - Você precisa fazer operações de find, findOne, insert e update no MongoDB.
  
 
 Diferenciais da aplicação:
 
-[x] - Seria bacana se você fizesse essa aplicação baseado no template que nós usamos aqui na Valore! Disponível aqui: https://github.com/brcambui/electron-react-typescript; 
+- [x] - Seria bacana se você fizesse essa aplicação baseado no template que nós usamos aqui na Valore! Disponível aqui: https://github.com/brcambui/electron-react-typescript; 
 
-[-] - Usar a API de IPC invoke/handle, ao invés de IPC send/on sempre que possível 🙂;
+- [-] - Usar a API de IPC invoke/handle, ao invés de IPC send/on sempre que possível 🙂;
 
 
 
