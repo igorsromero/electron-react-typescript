@@ -51,7 +51,7 @@ export const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Title />
+      <Title>Lista de Tarefas</Title>
       <AddTask tempId={tempId} setTempId={setTempId} handleCreateTask={handleCreateTask} handleUpdateTask={handleUpdateTask} handleClick={handleClick} />
       <hr />
       <ListTask taskList={taskList} handleUpdateStatus={handleUpdateStatus} handleClick={handleClick} />
