@@ -44,7 +44,7 @@ Diferenciais da aplicação:
 
 - [x] - Seria bacana se você fizesse essa aplicação baseado no template que nós usamos aqui na Valore! Disponível aqui: https://github.com/brcambui/electron-react-typescript; 
 
-- [-] - Usar a API de IPC invoke/handle, ao invés de IPC send/on sempre que possível 🙂;
+- [ ] - Usar a API de IPC invoke/handle, ao invés de IPC send/on sempre que possível 🙂;
 
 
 
