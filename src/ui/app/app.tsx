@@ -12,8 +12,8 @@ export const App: React.FC = () => {
   const [taskList, setTaskList] = useState<any>([])
   const [tempId, setTempId] = useState<string>(``)
 
-  const listTasks = () => {
-    findAllTasks().then((data) => {
+  const listTasks = async () => {
+    await findAllTasks().then((data) => {
       setTaskList({ ...data })
     })
   }
@@ -22,31 +22,31 @@ export const App: React.FC = () => {
     listTasks()
   }, [])
 
-  const handleCreateTask = (taskStatus: boolean, taskDate: Date, taskName: string) => {
+  const handleCreateTask = async(taskStatus: boolean, taskDate: Date, taskName: string) => {
     const task = { "status": taskStatus, "taskName": taskName, "taskDate": taskDate }
-    createTask(task)
-    listTasks()
+    await createTask(task)
+    await listTasks()
   }
 
-  const handleUpdateTask = (id: string, taskStatus: boolean, taskDate: Date, taskName: string) => {
+  const handleUpdateTask = async(id: string, taskStatus: boolean, taskDate: Date, taskName: string) => {
     const task = { "status": taskStatus, "taskName": taskName, "taskDate": taskDate }
-    updateTask(id, task)
-    listTasks()
+    await updateTask(id, task)
+    await listTasks()
   }
 
-  const handleUpdateStatus = (id: string, status: boolean) => {
+  const handleUpdateStatus = async(id: string, status: boolean) => {
     const task = { "status": status }
-    updateTask(id, task)
-    listTasks()
+    await updateTask(id, task)
+    await listTasks()
   }
 
-  const handleClick = (id: string, action: string) => {
+  const handleClick = async(id: string, action: string) => {
     if (action === `delete`) {
-      removeTask(id)
+      await removeTask(id)
     } else if (action === `edit`) {
       setTempId(id)
     }
-    listTasks()
+    await listTasks()
   }
 
   return (
